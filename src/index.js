@@ -11,6 +11,7 @@ import {
   ReactReduxFirebaseProvider,
   firebaseReducer,
 } from 'react-redux-firebase';
+import { BrowserRouter } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAMe7PAK5Zn0XoYWt3okgY_hiRcRkFvZxo',
@@ -50,7 +51,9 @@ const rrfProps = {
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root'),
