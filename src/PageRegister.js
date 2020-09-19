@@ -3,6 +3,7 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Redirect, Link } from 'react-router-dom';
+import 'firebase/database';
 
 class PageRegister extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class PageRegister extends React.Component {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
-      chat: {}
+      chat: []
     };
 
     try {

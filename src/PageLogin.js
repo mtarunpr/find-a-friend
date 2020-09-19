@@ -3,6 +3,7 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import 'firebase/database';
 class PageLogin extends React.Component {
     constructor(props) {
         super(props);
