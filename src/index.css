@@ -21,3 +21,51 @@
     font-weight: 1000;
     font-size: 20px;
 }
+.jumbotron-chat {
+    background-image: url("./img/chat-banner.png");
+    padding-top: 0;
+    padding-bottom: 1%;
+}
+
+.chat{
+    width: 80%;
+    background-color: #f7f7f7;
+}
+
+table{
+    width: 100%;
+    table-layout: fixed;
+    word-break: break-all;
+    border-collapse:separate; 
+    border-spacing:1em;
+}
+
+.user-one{
+    background-color: #d4e4ff;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    padding: 1%;
+}
+
+.user-two{
+    background-color: #95f0b4;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    padding: 1%;
+}
+
+.user-one:hover{
+    background-color: #96c8e0;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.user-two:hover{
+    background-color: #99e09f;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.send-chat{
+    vertical-align: middle;
+    width: 80%;
+    height: 100%;
+}
