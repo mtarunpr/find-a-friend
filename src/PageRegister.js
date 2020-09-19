@@ -45,10 +45,15 @@ class PageRegister extends React.Component {
     }
 
     return (
-      
+      <div class="center">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1>Find a Friend</h1>
+            <p>Chat with an anonymous person from your school and reveal to make friends!</p>
+          </div>
+        </div>
         <div class="col-md-6 mx-auto">
-        <br></br>
-        <h1 class="text-center">Page Register</h1>
+        <h3 class="text-center">Register</h3>
         <br></br>
             <div>{this.state.error}</div>
             
@@ -89,10 +94,10 @@ class PageRegister extends React.Component {
                     value={this.state.password}
                 />
             </div>
-
             <button class="btn btn-primary" disabled={!this.state.name} onClick={this.register}>Register</button>
-        
-
+            <br></br><br></br>
+            <p>If you have an account, <Link to="/login">Log In.</Link></p>
+        </div>
     </div>
     );
   }
