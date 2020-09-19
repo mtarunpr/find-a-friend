@@ -31,8 +31,9 @@ class PageLogin extends React.Component {
         }
     }
     render () {
+        
         if (this.props.isLoggedIn) {
-          this.props.firebase.logout();
+          return <Redirect to="/" />;
         }
         return (
         <div class="center">
