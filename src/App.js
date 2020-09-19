@@ -17,7 +17,7 @@ function App() {
       <Route exact path="/register">
         <PageRegister />
       </Route>
-      <Route exact path="/chat">
+      <Route exact path="/chat/:chatId">
         <PageChat />
       </Route>
     </Switch>
