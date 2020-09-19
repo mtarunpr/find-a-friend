@@ -46,43 +46,62 @@ class PageHome extends React.Component {
     const profiles = this.props.profiles;
     const user = profiles[id];
 
-
-
-    //create new chat
-    const chat = user.chat;
-    //const chatId = this.props.firebase.push('/chats').key;
-
-
+    //keys of userId
     const keys = Object.keys(profiles);
 
     // print all keys
     console.log(keys);
-    // [ 'java', 'javascript', 'nodejs', 'php' ]
 
     // iterate over object
-    // keys.forEach((key, index) => {
-    //     console.log(`${key}: ${profiles[key]}`);
-    // });
-
     //loop through to find another user without a chat
-    
+    var secondUser;
+    var id2;
     for (var i = 0; i < keys.length * 4; i++) {
       const rand = (Math.random() * (keys.length))|0;
-      const key = keys[rand];
-      const secondUser = profiles[key];
+      id2 = keys[rand];
+      secondUser = profiles[id2];
       // console.log(secondUser)
-      
 
-
+      if(!secondUser.chat){
+        break;
+      }
     }
 
 
-    const userUpdate = {
+
+    const updates = {};
+
+    //create new chat
+    const chatId = this.props.firebase.push('/chats').key;
+
+    //add deck
+    updates[`/chats/${chatId}`] = [{sender_id:'Bot', message:'Hello. Welcome to a new chat'}];
+
+    updates[`/users/${id}`] = {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      
+      chat: {
+        user_id: id2,
+        chatId: chatId,
+        reveal: false
+      }
     };
+
+    updates[`/users/${id2}`] = {
+      name: secondUser.name,
+      email: secondUser.email,
+      phone: secondUser.phone,
+      chat: {
+        user_id: id,
+        chatId: chatId,
+        reveal: false
+      }
+    };
+
+    const onComplete = () => this.props.history.push(`/chat/${chatId}`);
+    this.props.firebase.update(`/`, updates, onComplete);
+
 
   }
 
