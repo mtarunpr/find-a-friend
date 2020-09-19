@@ -6,6 +6,7 @@ import PageRegister from './PageRegister';
 import PageChat from './PageChat';
 import { isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import PageProfile from './PageProfile';
 
 const App = props => {
   if(!isLoaded(props.auth, props.profile)) {
@@ -22,6 +23,9 @@ const App = props => {
       </Route>
       <Route exact path="/register">
         <PageRegister />
+      </Route>
+      <Route exact path="/profile">
+        <PageProfile />
       </Route>
       <Route exact path="/chat/:chatId">
         <PageChat />
