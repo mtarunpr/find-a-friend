@@ -52,15 +52,11 @@ class PageHome extends React.Component {
       const rand = (Math.random() * (keys.length))|0;
       id2 = keys[rand];
       secondUser = profiles[id2];
-      // console.log(secondUser)
 
       if(!secondUser.chat){
         break;
       }
     }
-
-
-
     const updates = {};
 
     //create new chat
@@ -93,8 +89,6 @@ class PageHome extends React.Component {
 
     const onComplete = () => this.props.history.push(`/chat/${chatId}`);
     this.props.firebase.update(`/`, updates, onComplete);
-
-
   }
 
 
