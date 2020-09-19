@@ -70,7 +70,10 @@ class PageHome extends React.Component {
       const rand = (Math.random() * (keys.length))|0;
       const key = keys[rand];
       const secondUser = profiles[key];
-      console.log(secondUser)
+      // console.log(secondUser)
+      
+
+
     }
 
 
