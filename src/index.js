@@ -13,6 +13,8 @@ import {
 } from 'react-redux-firebase';
 import { BrowserRouter } from 'react-router-dom';
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAMe7PAK5Zn0XoYWt3okgY_hiRcRkFvZxo',
   authDomain: 'find-a-friend-hackmit.firebaseapp.com',
@@ -32,7 +34,7 @@ const rootReducer = combineReducers({
 });
 
 // Create store with reducers and initial state
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 // react-redux-firebase config
 const rrfConfig = {

@@ -20,6 +20,9 @@ function App() {
       <Route exact path="/chat">
         <PageChat />
       </Route>
+      <Route>
+        Page Not Found!
+      </Route>
     </Switch>
   );
 }
