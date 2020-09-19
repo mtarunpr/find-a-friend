@@ -33,7 +33,7 @@ class PageChat extends React.Component {
     }
 
     render () {
-        console.log(this.props)
+        // console.log(this.props)
         if(!isLoaded(this.props.messages)) {
             return <div>Loading...</div>
         } 
