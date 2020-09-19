@@ -34,6 +34,7 @@ class PageRegister extends React.Component {
 
     try {
       await this.props.firebase.createUser(credentials, profile);
+
     } catch (error) {
       this.setState({ error: error.message });
     }
@@ -41,7 +42,7 @@ class PageRegister extends React.Component {
 
   render() {
     if (this.props.isLoggedIn) {
-      this.props.firebase.logout();
+      return <Redirect to="/" />;
     }
 
     return (
