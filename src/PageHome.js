@@ -20,25 +20,17 @@ class PageHome extends React.Component {
       const profiles = this.props.profiles;
       const user = profiles[id];
       console.log(user)
-      if(!user.chat){
+      const chat = user.chat;
+      if(!chat){
         console.log('no chat')
         this.createChat()
         //create new chat
       } else{
+        console.log('exisiting chat')
+        const chatId = chat.chatId;
+        this.props.history.push(`/chat/${chatId}`);
 
-      }
-      // console.log("sending message " + this.props.isLoggedIn);
-      // const updates = {};
-      // const newMessage = {
-      //   sender_id: this.props.isLoggedIn,
-      //   message: this.state.message_send
-      // }
-      // this.props.messages.push(newMessage);
-
-      // updates[`/chats/${this.props.chatId}`] = this.props.messages;
-      // const onComplete = () => alert("sent");//this.props.history.push(`/chats/${chatId}`);
-      // this.props.firebase.update(`/`, updates, onComplete);
-      
+      }      
   }
 
   createChat = () => {

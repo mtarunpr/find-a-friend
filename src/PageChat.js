@@ -18,67 +18,61 @@ class PageChat extends React.Component {
 
     sendMessage = () => {
 
-      console.log("sending message " + this.props.isLoggedIn);
+      console.log("sending message");
       const updates = {};
       const newMessage = {
         sender_id: this.props.isLoggedIn,
         message: this.state.message_send
       }
-      this.props.messages.push(newMessage);
+      this.props.messages.append();
 
       updates[`/chats/${this.props.chatId}`] = this.props.messages;
-      //const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
-      this.props.firebase.update(`/`, updates);
-      this.state.message_send = '';
-    }
-
+      const onComplete = () => alert("sent");//this.props.history.push(`/chats/${chatId}`);
+      this.props.firebase.update(`/`, updates, onComplete);
+      
+  }
     render () {
-        // console.log(this.props)
+
         if(!isLoaded(this.props.messages)) {
             return <div>Loading...</div>
-        } 
+        }
+
+        
         if(isEmpty(this.props.messages)) {
             return <div>Page not found!</div>
         }
-        let users = [];
-        const messages = this.props.messages.map((message, index) =>{
-          if (!users.includes(message.sender_id)){
-            users.push(message.sender_id);
-          }
-          if (message.sender_id == users[0]){
-            return (
-              <tr>
-                <td></td><td></td><td class="user-one">{message.message}</td><td>{message.sender_id}</td>
-              </tr>
-            )
-          }
-          else{
-            return (
-              <tr>
-                <td>{message.sender_id}</td><td class="user-two">{message.message}</td><td></td><td></td>
-              </tr>
-            )
-          }
-        });
 
+        const messages = this.props.messages.map((message, index) =>{
+          return (
+              <tr>
+                  <td>{message.sender_id}  {message.message}</td>
+              </tr>
+            )
+        });
+        
+        const getCard = () => {
+
+            //console.log(this.state.index);
+            const card = this.props.cards[this.state.index];
+            if (this.state.front) {
+                return (<p>{card.front}</p>);
+            } else {
+                return (<p>{card.back}</p>);
+            }
+        }
         return (
-          <div class="center">
-            <div class="jumbotron-chat jumbotron jumbotron-fluid">
-              <div class="container">
+            <div class="container">
                 <br></br>
-                <h1>Chat</h1>
-                <p>If you both reveal, you'll be able to see each other's profile.</p>
-              </div>
-            </div>
-            <div class="container chat">
-                <br></br>
+
                 <div class="row align-items-center">
                   <table>
                     {messages}
                   </table>
+                    
                 </div>
                 <div class="row text-center">
-                  <div class="col-10">
+                  Message
+                  <div class="col-m-9">
                       <textarea 
                           class="form-control"
                           name="message_send"
@@ -87,9 +81,9 @@ class PageChat extends React.Component {
                           value={this.state.message_send}
                       />
                   </div>
-                  <div class="col-2">
+                  <div class="col-m-3">
                     <button
-                        class="btn btn-primary send-chat"
+                        class="btn btn-light"
                         onClick={this.sendMessage}
                         disabled={!this.state.message_send}
                       >
@@ -97,12 +91,11 @@ class PageChat extends React.Component {
                     </button>
                   </div>
                 </div>
-                <br></br>
+                
             </div>
-            <br></br>
-            <br></br>
-          </div>
+
         );
+
     }
 }
 
@@ -122,6 +115,8 @@ const mapStateToProps = (state, props) => {
     return {messages: messages, chatId: chatId, isLoggedIn: state.firebase.auth.uid, res:res};
 }
 
+
+
 export default compose(
     withRouter,
     firebaseConnect(props =>{
@@ -133,3 +128,17 @@ export default compose(
     }),
     connect(mapStateToProps),
  )(PageChat);
+
+
+// export default compose(
+//     withRouter,
+//     firebaseConnect(props =>{
+//         // console.log('props',props);
+//         const deckId = props.match.params.deckId;
+//         return [{path: `/flashcards/${deckId}`, storeAs: deckId}];
+//     }),
+//     connect(mapStateToProps),
+//  )(CardViewer);
+
+ //firebaseConnect([{path: '/flashcards/chemistry', storeAs:'deck1'}])(CardViewer);
+
