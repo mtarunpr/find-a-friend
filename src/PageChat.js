@@ -89,7 +89,7 @@ class PageChat extends React.Component {
                   </div>
                   <div class="col-2">
                     <button
-                        class="btn btn-primary"
+                        class="btn btn-primary send-chat"
                         onClick={this.sendMessage}
                         disabled={!this.state.message_send}
                       >

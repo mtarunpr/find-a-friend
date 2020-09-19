@@ -64,7 +64,7 @@ table{
     transition: background-color 0.2s ease-in-out;
 }
 
-.btn-primary{
+.send-chat{
     vertical-align: middle;
     width: 80%;
     height: 100%;
