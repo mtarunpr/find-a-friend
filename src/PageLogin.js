@@ -2,6 +2,7 @@ import React from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import 'firebase/database';
 class PageLogin extends React.Component {
@@ -35,10 +36,16 @@ class PageLogin extends React.Component {
           return <Redirect to="/" />;
         }
         return (
-            
+        <div class="center">
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <h1>Find a Friend</h1>
+                <p>Chat with an anonymous person from your school and reveal to make friends!</p>
+              </div>
+            </div>
             <div class="col-md-6 mx-auto">
                 <br></br>
-                <h1 class="text-center">Page Login</h1>
+                <h3 class="text-center">Login</h3>
                 <br></br>
                 <div>{this.state.error}</div>
                     <div class="form-group">
@@ -61,11 +68,12 @@ class PageLogin extends React.Component {
                             value={this.state.password}
                         />
                     </div>
-
+                    <br></br>
                     <button class="btn btn-primary" onClick={this.login}>Login</button>
-                
-
+                    <br></br><br></br>
+                    <p>Don't have an account? <Link to="/register">Register.</Link></p>
             </div>
+        </div>
         )
     }
 }

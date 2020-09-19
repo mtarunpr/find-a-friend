@@ -20,6 +20,9 @@ function App() {
       <Route exact path="/chat/:chatId">
         <PageChat />
       </Route>
+      <Route>
+        Page Not Found!
+      </Route>
     </Switch>
   );
 }

@@ -1,1 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
+
+.center{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.jumbotron {
+    background-image: url("./img/banner.png");
+    background-size: cover;
+    padding-top: 6.5%;
+    padding-bottom: 6.5%;
+}
+
+.jumbotron h1{
+    font-size: 50px;
+    font-weight: 1000;
+}
+
+.jumbotron p{
+    font-weight: 1000;
+    font-size: 20px;
+}
