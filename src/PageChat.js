@@ -22,7 +22,7 @@ class PageChat extends React.Component {
     handleChange = event => this.setState({[event.target.name]: event.target.value});
 
     sendMessage = () => {
-      if (this.state.message_send != ''){
+      if (this.state.message_send !== ''){
         console.log("sending message " + this.props.isLoggedIn);
         const updates = {};
         const newMessage = {
@@ -36,7 +36,7 @@ class PageChat extends React.Component {
         updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
         // const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
         this.props.firebase.update(`/`, updates);
-        this.state.message_send = '';
+        this.setState({message_send: ''});
       }
 
     }
@@ -54,14 +54,17 @@ class PageChat extends React.Component {
         const revealed = chat.reveal1 && chat.reveal2;
         if(revealed) {
           alert('You both chose to reveal your identities! Find out who they are in your home page.');
-          //do something
-          updates[`/users/${this.props.chat.sender1}/friends/${this.props.chat.sender2}`] = {
-            id: this.props.chat.sender2
-          };
 
-          updates[`/users/${this.props.chat.sender2}/friends/${this.props.chat.sender1}`] = {
-            id: this.props.chat.sender1
-          };
+          // Add friends if this user is the first to leave
+          if (this.props.chat.sender1 && this.props.chat.sender2) {
+            updates[`/users/${this.props.chat.sender1}/friends/${this.props.chat.sender2}`] = {
+              id: this.props.chat.sender2
+            };
+
+            updates[`/users/${this.props.chat.sender2}/friends/${this.props.chat.sender1}`] = {
+              id: this.props.chat.sender1
+            };
+          }
 
         }
 
@@ -149,17 +152,17 @@ class PageChat extends React.Component {
 
         const messages = this.props.chat.messages.map((message, index) =>{
           let avatar = "https://api.adorable.io/avatars/60/" + message.sender_id + "@adorable.io.png";
-          if (message.sender_id == this.props.isLoggedIn){
+          if (message.sender_id === this.props.isLoggedIn){
             return (
-              <tr>
-                <td></td><td></td><td className="user-one">{message.message}</td><td className="propic-one"><img src={avatar}></img></td>
+              <tr key={index}>
+                <td></td><td></td><td className="user-one">{message.message}</td><td className="propic-one"><img alt="User one" src={avatar}></img></td>
               </tr>
             )
           }
           else{
             return (
-              <tr>
-                <td className="propic-two"><img src={avatar}></img></td><td className="user-two">{message.message}</td><td></td><td></td>
+              <tr key={index}>
+                <td className="propic-two"><img alt="User two" src={avatar}></img></td><td className="user-two">{message.message}</td><td></td><td></td>
               </tr>
             )
           }
@@ -194,11 +197,15 @@ class PageChat extends React.Component {
                 <br></br>
                 <div className="row align-items-center">
                   <table>
-                    <col className="pic" />
-                    <col className="message" />
-                    <col className="message" />
-                    <col className="pic" />
-                    {messages}
+                    <colgroup>
+                      <col className="pic" />
+                      <col className="message" />
+                      <col className="message" />
+                      <col className="pic" />
+                    </colgroup>
+                    <tbody>
+                      {messages}
+                    </tbody>
                   </table>
                 </div>
                 <div style={{ float:"left", clear: "both" }}
