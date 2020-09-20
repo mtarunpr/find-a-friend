@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom'
+import {Link, Redirect, withRouter} from 'react-router-dom'
 import {firebaseConnect, isLoaded, isEmpty, populate} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
@@ -96,11 +96,15 @@ class PageHome extends React.Component {
     if(!isLoaded(this.props.profiles)) {
       return <div>Loading...</div>
     }
-
+    
+    if (!this.props.isLoggedIn) {
+      return <Redirect to='/login' />
+    }
     
     if(isEmpty(this.props.profiles)) {
         return <div>Page not found!</div>
     }
+
     const user = this.props.profiles[this.props.isLoggedIn];
 
     var friends;

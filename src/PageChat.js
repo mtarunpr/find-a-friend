@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import {Link, Redirect, withRouter} from 'react-router-dom'
 import {firebaseConnect, isLoaded, isEmpty, populate} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
@@ -114,10 +114,15 @@ class PageChat extends React.Component {
     }
 
     render () {
-        // console.log(this.props)
+        console.log(this.props)
         if(!isLoaded(this.props.chat)) {
             return <div>Loading...</div>
-        } 
+        }
+        
+        if (!this.props.isLoggedIn) {
+          return <Redirect to='/login' />;
+        }
+
         if(isEmpty(this.props.chat)) {
             return <div>Page not found!</div>
         }

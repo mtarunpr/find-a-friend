@@ -64,7 +64,7 @@ class PageProfile extends React.Component {
 
   render() {
     if (!this.props.isLoggedIn) {
-      return <Redirect to="/register" />
+      return <Redirect to="/login" />
     }
     const {
       name = '',
