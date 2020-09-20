@@ -10,7 +10,8 @@ class PageChat extends React.Component {
        // console.log(this.props.cards[0].front);
         this.state = {
           message_send: '',
-          open: false 
+          open: false,
+          reveal: 'Reveal'
         };
 
 
@@ -41,7 +42,12 @@ class PageChat extends React.Component {
 
     leaveChat = () => {
         const chatId = this.props.chatId;
+        const chat = this.props.chat;
         console.log("leaving " + this.props.chatId);
+
+        //check is both revealed
+        const revealed = chat.reveal1 && chat.reveal2;
+        //
         const updates = {};
 
         
@@ -53,6 +59,34 @@ class PageChat extends React.Component {
         this.props.firebase.update(`/`, updates, onComplete);
 
       
+    }
+
+    reveal = () => {
+      const sender1 = this.props.chat.sender1;
+      const sender2 = this.props.chat.sender2;
+
+      const updates = {};
+      if(this.state.reveal === 'reveal') {
+        if(this.props.isLoggedIn === sender1){
+          updates[`/chats/${this.props.chatId}/reveal1`] = true;
+        }else {
+          updates[`/chats/${this.props.chatId}/reveal2`] = true;
+        }
+        this.setState({reveal:'conceal'});
+      } else {
+        if(this.props.isLoggedIn === sender1){
+          updates[`/chats/${this.props.chatId}/reveal1`] = false;
+        }else {
+          updates[`/chats/${this.props.chatId}/reveal2`] = false;
+        }
+        
+        this.setState({reveal:'reveal'});
+
+      }
+      // const onComplete = () => this.props.history.push(`/`);
+      this.props.firebase.update(`/`, updates);
+
+    
     }
 
     render () {
@@ -89,7 +123,7 @@ class PageChat extends React.Component {
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
+              <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                   <a class="nav-link" href="./profile">Profile</a>
                 </li>
@@ -137,12 +171,20 @@ class PageChat extends React.Component {
             </div>
             <br></br>
             <br></br>
-
+            {/* Set up a confirmation before leaving the chat */}
             <button
               class="btn btn-primary"
               onClick={this.leaveChat}
             >
               Leave Chat
+            </button>
+
+
+            <button
+              class="btn btn-primary"
+              onClick={this.reveal}
+            >
+              {this.state.reveal}
             </button>
           </div>
         );
