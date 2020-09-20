@@ -10,7 +10,7 @@ class ProfileCardView extends React.Component {
   }
 
   goToProfile = ({url, username, classname}) => (
-    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" class={classname}>
+    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" className={classname}>
       {username}
     </a>
   );
@@ -35,13 +35,13 @@ class ProfileCardView extends React.Component {
           <div>
             <i 
               style={{ padding: 10, width: 30}} 
-              class="fa fa-phone icon" 
+              className="fa fa-phone icon" 
             />
             {this.props.profile.phone}
             <br />
             <i 
               style={{ padding: 10, width: 30}} 
-              class="fa fa-facebook icon" 
+              className="fa fa-facebook icon" 
             />
             <this.goToProfile
               url="https://www.facebook.com/"
@@ -52,7 +52,7 @@ class ProfileCardView extends React.Component {
             <br />
             <i 
               style={{ padding: 10, width: 30}} 
-              class="fa fa-instagram icon" 
+              className="fa fa-instagram icon" 
             />
             <this.goToProfile
               url="https://www.instagram.com/"

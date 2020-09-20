@@ -36,40 +36,40 @@ class PageLogin extends React.Component {
           return <Redirect to="/" />;
         }
         return (
-        <div class="center">
-            <div class="jumbotron jumbotron-fluid">
-              <div class="container">
+        <div className="center">
+            <div className="jumbotron jumbotron-fluid">
+              <div className="container">
                 <h1>Find a Friend</h1>
                 <p>Chat with an anonymous person from your school and reveal to make friends!</p>
               </div>
             </div>
-            <div class="col-md-6 mx-auto">
+            <div className="col-md-6 mx-auto">
                 <br></br>
-                <h3 class="text-center">Login</h3>
+                <h3 className="text-center">Login</h3>
                 <br></br>
                 <div>{this.state.error}</div>
-                    <div class="form-group">
+                    <div className="form-group">
                         
                         <input
                             name="email"
-                            class="form-control"
+                            className="form-control"
                             onChange={this.handleChange}
                             placeholder="Email"
                             value={this.state.email}
                         />
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                         <input
                             name="password"
                             type="password"
-                            class="form-control"
+                            className="form-control"
                             onChange={this.handleChange}
                             placeholder="Password"
                             value={this.state.password}
                         />
                     </div>
                     <br></br>
-                    <button class="btn btn-primary" onClick={this.login}>Login</button>
+                    <button className="btn btn-primary" onClick={this.login}>Login</button>
                     <br></br><br></br>
                     <p>Don't have an account? <Link to="/register">Register.</Link></p>
             </div>

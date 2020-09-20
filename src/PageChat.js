@@ -76,16 +76,17 @@ class PageChat extends React.Component {
           else if (this.props.chat.sender2 === this.props.isLoggedIn) {
             updates[`/chats/${this.props.chatId}/sender2`] = {};
           }
+
+          // Notify other user of the leaving
+          const newMessage = {
+            sender_id:'Bot',
+            message:'Your anonymous friend has left the chat!'
+          };
+          this.props.chat.messages.push(newMessage);
+          updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
         }
 
         updates[`/users/${this.props.isLoggedIn}/chat`] = [];
-
-        const newMessage = {
-          sender_id:'Bot',
-          message:'Your anonymous friend has left the chat!'
-        };
-        this.props.chat.messages.push(newMessage);
-        updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
 
         const onComplete = () => this.props.history.push(`/`);
         this.props.firebase.update(`/`, updates, onComplete);
@@ -151,52 +152,52 @@ class PageChat extends React.Component {
           if (message.sender_id == this.props.isLoggedIn){
             return (
               <tr>
-                <td></td><td></td><td class="user-one">{message.message}</td><td class="propic-one"><img src={avatar}></img></td>
+                <td></td><td></td><td className="user-one">{message.message}</td><td className="propic-one"><img src={avatar}></img></td>
               </tr>
             )
           }
           else{
             return (
               <tr>
-                <td class="propic-two"><img src={avatar}></img></td><td class="user-two">{message.message}</td><td></td><td></td>
+                <td className="propic-two"><img src={avatar}></img></td><td className="user-two">{message.message}</td><td></td><td></td>
               </tr>
             )
           }
         });
 
         return (
-          <div class="center">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="../">Find a Friend</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+          <div className="center">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href="../">Find a Friend</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="../profile">Profile</a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a className="nav-link" href="../profile">Profile</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/login" onClick={() => {this.props.firebase.logout()}}>Sign Out</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="/login" onClick={() => {this.props.firebase.logout()}}>Sign Out</a>
                 </li>
               </ul>
             </div>
           </nav>
-            <div class="jumbotron-chat jumbotron jumbotron-fluid">
-              <div class="container">
+            <div className="jumbotron-chat jumbotron jumbotron-fluid">
+              <div className="container">
                 <br></br>
                 <h1>Chat</h1>
                 <p>If you both reveal, you'll be able to see each other's profile.</p>
               </div>
             </div>
-            <div class="container chat">
+            <div className="container chat">
                 <br></br>
-                <div class="row align-items-center">
+                <div className="row align-items-center">
                   <table>
-                    <col class="pic" />
-                    <col class="message" />
-                    <col class="message" />
-                    <col class="pic" />
+                    <col className="pic" />
+                    <col className="message" />
+                    <col className="message" />
+                    <col className="pic" />
                     {messages}
                   </table>
                 </div>
@@ -205,11 +206,11 @@ class PageChat extends React.Component {
                 </div>
               </div>
               <br></br>
-              <div class="container">
-                <div class="row text-center">
-                  <div class="col-10">
+              <div className="container">
+                <div className="row text-center">
+                  <div className="col-10">
                       <textarea 
-                          class="form-control"
+                          className="form-control"
                           name="message_send"
                           onChange={this.handleChange}
                           onKeyPress={event => {if (event.key === 'Enter'){event.preventDefault(); this.sendMessage();}}}
@@ -217,9 +218,9 @@ class PageChat extends React.Component {
                           value={this.state.message_send}
                       />
                   </div>
-                  <div class="col-2">
+                  <div className="col-2">
                     <button
-                        class="btn btn-primary send-chat"
+                        className="btn btn-primary send-chat"
                         onClick={this.sendMessage}
                         disabled={!this.state.message_send}
                       >
@@ -229,13 +230,13 @@ class PageChat extends React.Component {
                 </div>
                 {/* Set up a confirmation before leaving the chat */}
                 <button
-                  class="btn btn-primary leave"
+                  className="btn btn-primary leave"
                   onClick={this.leaveChat}
                 >
                   Leave Chat
                 </button>
                 <button
-                  class="btn btn-primary reveal"
+                  className="btn btn-primary reveal"
                   onClick={this.reveal}
                 >
                   {this.state.reveal}

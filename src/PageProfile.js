@@ -42,7 +42,7 @@ class PageProfile extends React.Component {
   }
 
   goToProfile = ({url, username}) => (
-    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" class="btn btn-light profile">
+    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" className="btn btn-light profile">
       Test It
     </a>
   );
@@ -76,25 +76,25 @@ class PageProfile extends React.Component {
     var changed = !this.checkChanged();
 
     return (
-      <div class="center">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="../">Find a Friend</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+      <div className="center">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href="../">Find a Friend</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="./profile">Profile</a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active">
+                  <a className="nav-link" href="./profile">Profile</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/login" onClick={() => {this.props.firebase.logout()}}>Sign Out</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="/login" onClick={() => {this.props.firebase.logout()}}>Sign Out</a>
                 </li>
               </ul>
             </div>
           </nav>
-          <div class="jumbotron jumbotron-fluid">
-            <div class="container">
+          <div className="jumbotron jumbotron-fluid">
+            <div className="container">
               <h1>Profile</h1>
             </div>
           </div>
@@ -105,7 +105,7 @@ class PageProfile extends React.Component {
         <br></br>
         <i 
           style={{ padding: 10, width: 30 }} 
-          class="fa fa-user icon" />
+          className="fa fa-user icon" />
         <input 
           autoComplete='off'
           name='name'
@@ -117,7 +117,7 @@ class PageProfile extends React.Component {
         <br />
         <i 
           style={{ padding: 10, width: 30 }} 
-          class="fa fa-phone icon" />
+          className="fa fa-phone icon" />
         <input 
           autoComplete='off'
           name='phone'
@@ -135,7 +135,7 @@ class PageProfile extends React.Component {
         <br></br>
         <i 
           style={{ padding: 10, width: 30 }} 
-          class="fa fa-instagram icon" />
+          className="fa fa-instagram icon" />
         <input 
           autoComplete='off'
           name='instagram'
@@ -151,7 +151,7 @@ class PageProfile extends React.Component {
         <br />
         <i 
           style={{ padding: 10, width: 30}} 
-          class="fa fa-facebook icon" />
+          className="fa fa-facebook icon" />
         <input 
           autoComplete='off'
           name='facebook'
@@ -166,7 +166,7 @@ class PageProfile extends React.Component {
         />
         <br />
         <br></br>
-        <button class="btn btn-dark update-profile"
+        <button className="btn btn-dark update-profile"
           onClick={this.update}
           disabled={this.state.name.trim() === ''}
         >
