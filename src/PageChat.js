@@ -45,17 +45,25 @@ class PageChat extends React.Component {
         const chat = this.props.chat;
         console.log("leaving " + this.props.chatId);
 
+
+        const updates = {};
+
+
         //check is both revealed
         const revealed = chat.reveal1 && chat.reveal2;
         if(revealed) {
-          alert('You both chose to reveal your identities!');
+          alert('You both chose to reveal your identities! Find out who they are in your home page');
           //do something
-        }
-        //
-        const updates = {};
+          updates[`/users/${this.props.chat.sender1}/friends/${this.props.chat.sender2}`] = {
+            id: this.props.chat.sender2
+          };
 
-        
-        
+          updates[`/users/${this.props.chat.sender2}/friends/${this.props.chat.sender1}`] = {
+            id: this.props.chat.sender1
+          };
+
+        }
+
         updates[`/users/${this.props.chat.sender1}/chat`] = [];
         updates[`/users/${this.props.chat.sender2}/chat`] = [];
         updates[`/chats/${this.props.chatId}`] = {};

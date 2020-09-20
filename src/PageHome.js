@@ -94,34 +94,6 @@ class PageHome extends React.Component {
   }
 
 
-  createDeck = () => {
-
-    console.log("creating deck");
-    const updates = {};
-    const deckId = this.props.firebase.push('/flashcards').key;
-    const newDeck = {
-        cards: this.state.cards,
-        name: this.state.name,
-        description: this.state.description,
-        visibility: this.state.visibility,
-        owner: this.props.isLoggedIn,
-    };
-    console.log(newDeck.owner);
-    //add deck
-    updates[`/flashcards/${deckId}`] = newDeck;
-    //add link
-    updates[`/homepage/${deckId}`] = {
-        name: this.state.name,
-        description: this.state.description,
-        owner: this.props.isLoggedIn,
-        visibility: this.state.visibility,
-
-    };
-    const onComplete = () => this.props.history.push(`/viewer/${deckId}`);
-    this.props.firebase.update(`/`, updates, onComplete);
-  }
-   
-
 
   render () {
     if(!isLoaded(this.props.profiles)) {
@@ -132,6 +104,22 @@ class PageHome extends React.Component {
     if(isEmpty(this.props.profiles)) {
         return <div>Page not found!</div>
     }
+    const user = this.props.profiles[this.props.isLoggedIn];
+
+    var friends;
+    if(user.friends !== undefined) {
+      const profiles = this.props.profiles;
+      friends = Object.keys(user.friends).map(function(keyName, keyIndex) {
+        console.log(profiles);
+        const profile = profiles[keyName];
+        const path = `/profile/${keyName}`;
+        return(
+          <Link to={path}>{profile.name}</Link>
+        );
+      });
+    }
+    
+
       return (
         <div class="center">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -161,6 +149,7 @@ class PageHome extends React.Component {
               <div class="col-sm">
                 <h3>Friends</h3>
                 <hr></hr>
+                {friends}
               </div>
               <div class="col-sm">
                 <button class="btn btn-primary" onClick={this.openChat}>
@@ -178,23 +167,12 @@ class PageHome extends React.Component {
   }
 }
 
-const populates = [
-  { child: 'owner', root: 'users' } // replace owner with user object
-]
 
 const mapStateToProps = (state, props) => {
 
   const userId = state.firebase.auth.uid;
   const profiles = state.firebase.data;
-  const profile = profiles[userId];
-  
-  // const username = profile && profile.username;
-
   console.log(profiles.users)
-  // console.log(username)
-
-
-
   return {isLoggedIn: userId, profiles: profiles.users};
 }
 
