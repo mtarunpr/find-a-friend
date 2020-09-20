@@ -63,14 +63,9 @@ class PageChat extends React.Component {
         if(isEmpty(this.props.chat)) {
             return <div>Page not found!</div>
         }
-        let users = [];          
-        console.log(this.props.chat.messages)
 
         const messages = this.props.chat.messages.map((message, index) =>{
-          if (!users.includes(message.sender_id)){
-            users.push(message.sender_id);
-          }
-          if (message.sender_id == users[0]){
+          if (message.sender_id == this.props.isLoggedIn){
             return (
               <tr>
                 <td></td><td></td><td class="user-one">{message.message}</td><td>{message.sender_id}</td>
