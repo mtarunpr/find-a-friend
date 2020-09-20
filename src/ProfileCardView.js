@@ -9,6 +9,12 @@ class ProfileCardView extends React.Component {
     }
   }
 
+  goToProfile = ({url, username, classname}) => (
+    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" class={classname}>
+      {username}
+    </a>
+  );
+
   render() {
     return (
       <div style={{ border: 'black' }}> 
@@ -21,6 +27,7 @@ class ProfileCardView extends React.Component {
                 ? 'fa fa-chevron-down'
                 : 'fa fa-chevron-right'
             }
+            style={{ padding: 10, width: 30}} 
           ></i>
           {this.props.profile.name}
         </div>
@@ -36,13 +43,22 @@ class ProfileCardView extends React.Component {
               style={{ padding: 10, width: 30}} 
               class="fa fa-facebook icon" 
             />
-            {this.props.profile.facebook}
+            <this.goToProfile
+              url="https://www.facebook.com/"
+              username={this.props.profile.facebook || 'n/a'}
+              classname="btn btn-outline-primary btn-sm"
+            />
+            {/* {this.props.profile.facebook || 'n/a'} */}
             <br />
             <i 
               style={{ padding: 10, width: 30}} 
               class="fa fa-instagram icon" 
             />
-            {this.props.profile.instagram}
+            <this.goToProfile
+              url="https://www.instagram.com/"
+              username={this.props.profile.instagram || 'n/a'}
+              classname="btn btn-outline-info btn-sm"
+            />
           </div>
         )}
         <br />

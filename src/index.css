@@ -108,3 +108,16 @@ table{
 .pic{
     width: 7%;
 }
+
+.btn-outline-info {
+    color: #E1306C;
+    background-color: transparent;
+    background-image: none;
+    border-color: #E1306C
+}
+
+.btn-outline-info:hover {
+    color: #ffffff;
+    background-color: #E1306C;
+    border-color: #E1306C
+}
