@@ -33,7 +33,13 @@ class PageHome extends React.Component {
     } else {
       console.log('existing chat');
       const chatId = chat.chatId;
-      this.props.history.push(`/chat/${chatId}`);
+      const updates = {};
+      updates[`/users/${id}/chat`] = {
+        joined_chat: true
+      };
+
+      const onComplete = () => this.props.history.push(`/chat/${chatId}`);
+      this.props.firebase.update(`/`, updates, onComplete);
     }
   };
 
@@ -87,6 +93,7 @@ class PageHome extends React.Component {
     updates[`/users/${id2}/chat`] = {
       user_id: id,
       chatId: chatId,
+      joined_chat: false
     };
 
     const onComplete = () => this.props.history.push(`/chat/${chatId}`);
@@ -175,7 +182,7 @@ class PageHome extends React.Component {
             </div>
             <div className="col-sm">
               {console.log('Chat', this.props.chat)}
-              {this.props.chat ? (
+              {(this.props.chat && this.props.chat.joined_chat) ? (
                 <button className="btn btn-success" onClick={this.openChat}>
                   Continue chatting
                 </button>
