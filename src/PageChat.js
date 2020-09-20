@@ -22,21 +22,22 @@ class PageChat extends React.Component {
     handleChange = event => this.setState({[event.target.name]: event.target.value});
 
     sendMessage = () => {
+      if (this.state.message_send != ''){
+        console.log("sending message " + this.props.isLoggedIn);
+        const updates = {};
+        const newMessage = {
+          sender_id: this.props.isLoggedIn,
+          message: this.state.message_send
+        }
+        this.props.chat.messages.push(newMessage);
+        // console.log(this.props.chat.messages);
 
-      console.log("sending message " + this.props.isLoggedIn);
-      const updates = {};
-      const newMessage = {
-        sender_id: this.props.isLoggedIn,
-        message: this.state.message_send
+
+        updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
+        // const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
+        this.props.firebase.update(`/`, updates);
+        this.state.message_send = '';
       }
-      this.props.chat.messages.push(newMessage);
-      // console.log(this.props.chat.messages);
-
-
-      updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
-      // const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
-      this.props.firebase.update(`/`, updates);
-      this.state.message_send = '';
 
     }
 
@@ -52,7 +53,7 @@ class PageChat extends React.Component {
         //check is both revealed
         const revealed = chat.reveal1 && chat.reveal2;
         if(revealed) {
-          alert('You both chose to reveal your identities! Find out who they are in your home page');
+          alert('You both chose to reveal your identities! Find out who they are in your home page.');
           //do something
           updates[`/users/${this.props.chat.sender1}/friends/${this.props.chat.sender2}`] = {
             id: this.props.chat.sender2
@@ -99,6 +100,17 @@ class PageChat extends React.Component {
       this.props.firebase.update(`/`, updates);
 
     
+    }
+
+    scrollToBottom = () => {
+      if (this.messagesEnd) { this.messagesEnd.scrollIntoView({behavior: "smooth"})}
+    }    
+    componentDidMount() {
+      this.scrollToBottom();
+    }
+    
+    componentDidUpdate() {
+      this.scrollToBottom();
     }
 
     render () {
@@ -164,6 +176,9 @@ class PageChat extends React.Component {
                     {messages}
                   </table>
                 </div>
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+                </div>
               </div>
               <br></br>
               <div class="container">
@@ -173,7 +188,7 @@ class PageChat extends React.Component {
                           class="form-control"
                           name="message_send"
                           onChange={this.handleChange}
-                          onKeyPress={event => {if (event.key === 'Enter'){this.sendMessage();}}}
+                          onKeyPress={event => {if (event.key === 'Enter'){event.preventDefault(); this.sendMessage();}}}
                           placeholder="Send message"
                           value={this.state.message_send}
                       />
