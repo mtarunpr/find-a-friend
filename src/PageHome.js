@@ -26,7 +26,7 @@ class PageHome extends React.Component {
         this.createChat()
         //create new chat
       } else{
-        console.log('exisiting chat')
+        console.log('existing chat')
         const chatId = chat.chatId;
         this.props.history.push(`/chat/${chatId}`);
 
@@ -53,9 +53,13 @@ class PageHome extends React.Component {
       id2 = keys[rand];
       secondUser = profiles[id2];
 
-      if(!secondUser.chat){
+      if(!secondUser.chat && id2 !== id){
         break;
       }
+    }
+    if(secondUser.chat){
+      alert("Sorry, there are no available matches at the moment. Please wait a hot sec");
+      return;
     }
     const updates = {};
 
@@ -69,24 +73,16 @@ class PageHome extends React.Component {
       messages: [{sender_id:'Bot', message:'Hello. Welcome to a new chat'}]
     };
 
-    updates[`/users/${id}`] = {
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      chat: {
+    updates[`/users/${id}/chat`] = {
         user_id: id2,
         chatId: chatId
-      }
+      
     };
 
-    updates[`/users/${id2}`] = {
-      name: secondUser.name,
-      email: secondUser.email,
-      phone: secondUser.phone,
-      chat: {
+    updates[`/users/${id2}/chat`] = {
         user_id: id,
         chatId: chatId
-      }
+      
     };
 
     const onComplete = () => this.props.history.push(`/chat/${chatId}`);
