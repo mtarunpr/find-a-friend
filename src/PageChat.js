@@ -103,6 +103,19 @@ class PageChat extends React.Component {
     this.props.firebase.update(`/`, updates, onComplete);
   };
 
+  report = () => {
+    const reportId = this.props.firebase.push('/reports').key;
+    const updates = {};
+    updates[reportId] = {
+      ...this.props.chat,
+      reporter_id: this.props.isLoggedIn,
+    };
+
+    this.props.firebase.update(`/reports`, updates);
+
+    alert('This user has been reported. Please feel free to leave the chat.');
+  };
+
   reveal = () => {
     const sender1 = this.props.chat.sender1;
     const sender2 = this.props.chat.sender2;
@@ -133,7 +146,7 @@ class PageChat extends React.Component {
       this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  
+
   componentDidMount() {
     this.scrollToBottom();
   }
@@ -284,6 +297,9 @@ class PageChat extends React.Component {
           {/* Set up a confirmation before leaving the chat */}
           <button className="btn btn-primary leave" onClick={this.leaveChat}>
             Leave Chat
+          </button>
+          <button className="btn btn-danger report" onClick={this.report}>
+            Report
           </button>
           <button className="btn btn-primary reveal" onClick={this.reveal}>
             {this.state.reveal}
