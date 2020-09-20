@@ -30,11 +30,13 @@
 .chat{
     width: 80%;
     background-color: #f7f7f7;
+    overflow: auto;
+    height: 45vh;
 }
+
 
 table{
     width: 100%;
-    table-layout: fixed;
     word-break: break-all;
     border-collapse:separate; 
     border-spacing:1em;
@@ -80,4 +82,29 @@ table{
     margin-top: 10px;
     float: right;
     width: 48%;
+}
+
+.update-profile{
+    width: 35%;
+}
+
+.profile{
+    margin-top: 2px;
+    margin-left: 1%;
+    margin-bottom: 2px;
+
+}
+
+.propic-one{
+    float: right;
+}
+
+.propic-two{
+    float: left;
+}
+.message{
+    width: 43%;
+}
+.pic{
+    width: 7%;
 }

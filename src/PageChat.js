@@ -37,8 +37,8 @@ class PageChat extends React.Component {
       // const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
       this.props.firebase.update(`/`, updates);
       this.state.message_send = '';
-    }
 
+    }
 
     leaveChat = () => {
         const chatId = this.props.chatId;
@@ -111,17 +111,18 @@ class PageChat extends React.Component {
         }
 
         const messages = this.props.chat.messages.map((message, index) =>{
+          let avatar = "https://api.adorable.io/avatars/60/" + message.sender_id + "@adorable.io.png";
           if (message.sender_id == this.props.isLoggedIn){
             return (
               <tr>
-                <td></td><td></td><td class="user-one">{message.message}</td><td>{message.sender_id}</td>
+                <td></td><td></td><td class="user-one">{message.message}</td><td class="propic-one"><img src={avatar}></img></td>
               </tr>
             )
           }
           else{
             return (
               <tr>
-                <td>{message.sender_id}</td><td class="user-two">{message.message}</td><td></td><td></td>
+                <td class="propic-two"><img src={avatar}></img></td><td class="user-two">{message.message}</td><td></td><td></td>
               </tr>
             )
           }
@@ -156,15 +157,23 @@ class PageChat extends React.Component {
                 <br></br>
                 <div class="row align-items-center">
                   <table>
+                    <col class="pic" />
+                    <col class="message" />
+                    <col class="message" />
+                    <col class="pic" />
                     {messages}
                   </table>
                 </div>
+              </div>
+              <br></br>
+              <div class="container">
                 <div class="row text-center">
                   <div class="col-10">
                       <textarea 
                           class="form-control"
                           name="message_send"
                           onChange={this.handleChange}
+                          onKeyPress={event => {if (event.key === 'Enter'){this.sendMessage();}}}
                           placeholder="Send message"
                           value={this.state.message_send}
                       />
@@ -179,7 +188,6 @@ class PageChat extends React.Component {
                     </button>
                   </div>
                 </div>
-                <br></br>
                 {/* Set up a confirmation before leaving the chat */}
                 <button
                   class="btn btn-primary leave"
@@ -193,9 +201,8 @@ class PageChat extends React.Component {
                 >
                   {this.state.reveal}
                 </button>
+                <br></br><br></br>
             </div>
-            <br></br>
-            <br></br>
           </div>
         );
     }
