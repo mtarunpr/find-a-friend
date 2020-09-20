@@ -4,6 +4,7 @@ import {firebaseConnect, isLoaded, isEmpty, populate} from 'react-redux-firebase
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 import './index.css';
+import ProfileCardView from './ProfileCardView.js';
 
 class PageHome extends React.Component {
   constructor(props) {
@@ -110,7 +111,8 @@ class PageHome extends React.Component {
         const profile = profiles[keyName];
         const path = `/profile/${keyName}`;
         return(
-          <Link to={path}>{profile.name}</Link>
+          // <Link to={path}>{profile.name}</Link>
+          <ProfileCardView profile = {profile} />
         );
       });
     }
