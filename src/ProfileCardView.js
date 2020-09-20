@@ -5,43 +5,44 @@ class ProfileCardView extends React.Component {
     super(props);
 
     this.state = {
-      selected: false
-    }
+      selected: false,
+    };
   }
 
-  goToProfile = ({url, username, classname}) => (
-    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" className={classname}>
+  goToProfile = ({ url, username, classname }) => (
+    <a
+      href={`${url}${username}`}
+      rel="noopener noreferrer"
+      target="_blank"
+      className={classname}
+    >
       {username}
     </a>
   );
 
   render() {
     return (
-      <div style={{ border: 'black' }}> 
-        <div onClick={() => 
-          this.setState({ selected: !this.state.selected }) 
-        }>
+      <div style={{ border: 'black' }}>
+        <div onClick={() => this.setState({ selected: !this.state.selected })}>
           <i
             className={
-              this.state.selected
-                ? 'fa fa-chevron-down'
-                : 'fa fa-chevron-right'
+              this.state.selected ? 'fa fa-chevron-down' : 'fa fa-chevron-right'
             }
-            style={{ padding: 10, width: 30}} 
+            style={{ padding: 10, width: 30 }}
           ></i>
           {this.props.profile.name}
         </div>
         {this.state.selected && (
           <div>
-            <i 
-              style={{ padding: 10, width: 30}} 
-              className="fa fa-phone icon" 
+            <i
+              style={{ padding: 10, width: 30 }}
+              className="fa fa-phone icon"
             />
             {this.props.profile.phone}
             <br />
-            <i 
-              style={{ padding: 10, width: 30}} 
-              className="fa fa-facebook icon" 
+            <i
+              style={{ padding: 10, width: 30 }}
+              className="fa fa-facebook icon"
             />
             <this.goToProfile
               url="https://www.facebook.com/"
@@ -50,9 +51,9 @@ class ProfileCardView extends React.Component {
             />
             {/* {this.props.profile.facebook || 'n/a'} */}
             <br />
-            <i 
-              style={{ padding: 10, width: 30}} 
-              className="fa fa-instagram icon" 
+            <i
+              style={{ padding: 10, width: 30 }}
+              className="fa fa-instagram icon"
             />
             <this.goToProfile
               url="https://www.instagram.com/"

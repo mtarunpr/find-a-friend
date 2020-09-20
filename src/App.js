@@ -10,8 +10,8 @@ import PageProfile from './PageProfile';
 import PageFriend from './PageFriend';
 
 const App = props => {
-  if(!isLoaded(props.auth, props.profile)) {
-    return <div>Authentication Loading...</div>
+  if (!isLoaded(props.auth, props.profile)) {
+    return <div>Authentication Loading...</div>;
   }
 
   return (
@@ -35,15 +35,13 @@ const App = props => {
       <Route exact path="/chat/:chatId">
         <PageChat />
       </Route>
-      <Route>
-        Page Not Found!
-      </Route>
+      <Route>Page Not Found!</Route>
     </Switch>
   );
-}
+};
 
 const mapStateToProps = state => {
-  return { auth: state.firebase.auth, profile: state.firebase.profile }
-}
+  return { auth: state.firebase.auth, profile: state.firebase.profile };
+};
 
 export default connect(mapStateToProps)(App);

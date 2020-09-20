@@ -1,123 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-
-.center{
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
+.center {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
+
 .jumbotron {
-    background-image: url("./img/banner.png");
-    background-size: cover;
-    padding-top: 6.5%;
-    padding-bottom: 6.5%;
+  background-image: url('./img/banner.png');
+  background-size: cover;
+  padding-top: 6.5%;
+  padding-bottom: 6.5%;
 }
 
-.jumbotron h1{
-    font-size: 50px;
-    font-weight: 1000;
+.jumbotron h1 {
+  font-size: 50px;
+  font-weight: 1000;
 }
 
-.jumbotron p{
-    font-weight: 1000;
-    font-size: 20px;
+.jumbotron p {
+  font-weight: 1000;
+  font-size: 20px;
 }
 .jumbotron-chat {
-    background-image: url("./img/chat-banner.png");
-    padding-top: 0;
-    padding-bottom: 1%;
+  background-image: url('./img/chat-banner.png');
+  padding-top: 0;
+  padding-bottom: 1%;
 }
 
-.chat{
-    width: 80%;
-    background-color: #f7f7f7;
-    overflow: auto;
-    height: 45vh;
+.chat {
+  width: 80%;
+  background-color: #f7f7f7;
+  overflow: auto;
+  height: 45vh;
 }
 
-
-table{
-    width: 100%;
-    word-break: break-all;
-    border-collapse:separate; 
-    border-spacing:1em;
+table {
+  width: 100%;
+  word-break: break-all;
+  border-collapse: separate;
+  border-spacing: 1em;
 }
 
-.user-one{
-    background-color: #d4e4ff;
-    text-align: center;
-    border-radius: 15px 15px 15px 15px;
-    padding: 1%;
+.user-one {
+  background-color: #d4e4ff;
+  text-align: center;
+  border-radius: 15px 15px 15px 15px;
+  padding: 1%;
 }
 
-.user-two{
-    background-color: #95f0b4;
-    text-align: center;
-    border-radius: 15px 15px 15px 15px;
-    padding: 1%;
+.user-two {
+  background-color: #95f0b4;
+  text-align: center;
+  border-radius: 15px 15px 15px 15px;
+  padding: 1%;
 }
 
-.user-one:hover{
-    background-color: #96c8e0;
-    transition: background-color 0.2s ease-in-out;
+.user-one:hover {
+  background-color: #96c8e0;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.user-two:hover{
-    background-color: #99e09f;
-    transition: background-color 0.2s ease-in-out;
+.user-two:hover {
+  background-color: #99e09f;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.send-chat{
-    vertical-align: middle;
-    width: 80%;
-    height: 100%;
+.send-chat {
+  vertical-align: middle;
+  width: 80%;
+  height: 100%;
 }
 
-.leave{
-    margin-top: 10px;
-    float: left;
-    width: 48%;
+.leave {
+  margin-top: 10px;
+  float: left;
+  width: 48%;
 }
 
-.reveal{
-    margin-top: 10px;
-    float: right;
-    width: 48%;
+.reveal {
+  margin-top: 10px;
+  float: right;
+  width: 48%;
 }
 
-.update-profile{
-    width: 35%;
+.update-profile {
+  width: 35%;
 }
 
-.profile{
-    margin-top: 2px;
-    margin-left: 1%;
-    margin-bottom: 2px;
-
+.profile {
+  margin-top: 2px;
+  margin-left: 1%;
+  margin-bottom: 2px;
 }
 
-.propic-one{
-    float: right;
+.propic-one {
+  float: right;
 }
 
-.propic-two{
-    float: left;
+.propic-two {
+  float: left;
 }
-.message{
-    width: 43%;
+.message {
+  width: 43%;
 }
-.pic{
-    width: 7%;
+.pic {
+  width: 7%;
 }
 
 .btn-outline-info {
-    color: #E1306C;
-    background-color: transparent;
-    background-image: none;
-    border-color: #E1306C
+  color: #e1306c;
+  background-color: transparent;
+  background-image: none;
+  border-color: #e1306c;
 }
 
 .btn-outline-info:hover {
-    color: #ffffff;
-    background-color: #E1306C;
-    border-color: #E1306C
+  color: #ffffff;
+  background-color: #e1306c;
+  border-color: #e1306c;
 }
