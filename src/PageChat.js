@@ -47,6 +47,10 @@ class PageChat extends React.Component {
 
         //check is both revealed
         const revealed = chat.reveal1 && chat.reveal2;
+        if(revealed) {
+          alert('You both chose to reveal your identities!');
+          //do something
+        }
         //
         const updates = {};
 
@@ -66,13 +70,13 @@ class PageChat extends React.Component {
       const sender2 = this.props.chat.sender2;
 
       const updates = {};
-      if(this.state.reveal === 'reveal') {
+      if(this.state.reveal === 'Reveal') {
         if(this.props.isLoggedIn === sender1){
           updates[`/chats/${this.props.chatId}/reveal1`] = true;
         }else {
           updates[`/chats/${this.props.chatId}/reveal2`] = true;
         }
-        this.setState({reveal:'conceal'});
+        this.setState({reveal:'Conceal'});
       } else {
         if(this.props.isLoggedIn === sender1){
           updates[`/chats/${this.props.chatId}/reveal1`] = false;
@@ -80,7 +84,7 @@ class PageChat extends React.Component {
           updates[`/chats/${this.props.chatId}/reveal2`] = false;
         }
         
-        this.setState({reveal:'reveal'});
+        this.setState({reveal:'Reveal'});
 
       }
       // const onComplete = () => this.props.history.push(`/`);
