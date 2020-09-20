@@ -9,11 +9,15 @@ class PageChat extends React.Component {
         super(props);
        // console.log(this.props.cards[0].front);
         this.state = {
-          message_send: ''
+          message_send: '',
+          open: false 
         };
+
 
     }
 
+    open = () => this.setState({ open: true })
+    close = () => this.setState({ open: false })
     handleChange = event => this.setState({[event.target.name]: event.target.value});
 
     sendMessage = () => {
@@ -24,24 +28,45 @@ class PageChat extends React.Component {
         sender_id: this.props.isLoggedIn,
         message: this.state.message_send
       }
-      this.props.messages.push(newMessage);
+      this.props.chat.messages.push(newMessage);
+      // console.log(this.props.chat.messages);
 
-      updates[`/chats/${this.props.chatId}`] = this.props.messages;
-      //const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
+
+      updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
+      // const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
       this.props.firebase.update(`/`, updates);
       this.state.message_send = '';
     }
 
+
+    leaveChat = () => {
+        const chatId = this.props.chatId;
+        console.log("leaving " + this.props.chatId);
+        const updates = {};
+
+        
+        
+        updates[`/users/${this.props.chat.sender1}/chat`] = [];
+        updates[`/users/${this.props.chat.sender1}/chat`] = [];
+        updates[`/chats/${this.props.chatId}`] = {};
+        const onComplete = () => this.props.history.push(`/`);
+        this.props.firebase.update(`/`, updates, onComplete);
+
+      
+    }
+
     render () {
         // console.log(this.props)
-        if(!isLoaded(this.props.messages)) {
+        if(!isLoaded(this.props.chat)) {
             return <div>Loading...</div>
         } 
-        if(isEmpty(this.props.messages)) {
+        if(isEmpty(this.props.chat)) {
             return <div>Page not found!</div>
         }
-        let users = [];
-        const messages = this.props.messages.map((message, index) =>{
+        let users = [];          
+        console.log(this.props.chat.messages)
+
+        const messages = this.props.chat.messages.map((message, index) =>{
           if (!users.includes(message.sender_id)){
             users.push(message.sender_id);
           }
@@ -101,6 +126,13 @@ class PageChat extends React.Component {
             </div>
             <br></br>
             <br></br>
+
+            <button
+              class="btn btn-primary"
+              onClick={this.leaveChat}
+            >
+              Leave Chat
+            </button>
           </div>
         );
     }
@@ -114,12 +146,13 @@ const mapStateToProps = (state, props) => {
 
     console.log(state);
     const chatId = props.match.params.chatId;
-    const messages = state.firebase.data[chatId];
-    console.log(messages)
+    const chat = state.firebase.data[chatId];
+    // const messages = chat && chat.messages;
+    // console.log(messages)
 
     const res = populate(state.firebase, chatId, populates);
     console.log(res);
-    return {messages: messages, chatId: chatId, isLoggedIn: state.firebase.auth.uid, res:res};
+    return {chat: chat, chatId: chatId, isLoggedIn: state.firebase.auth.uid, res:res};
 }
 
 export default compose(

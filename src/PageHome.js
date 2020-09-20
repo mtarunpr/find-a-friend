@@ -63,7 +63,11 @@ class PageHome extends React.Component {
     const chatId = this.props.firebase.push('/chats').key;
 
     //add deck
-    updates[`/chats/${chatId}`] = [{sender_id:'Bot', message:'Hello. Welcome to a new chat'}];
+    updates[`/chats/${chatId}`] = {
+      sender1:id,
+      sender2:id2,
+      messages: [{sender_id:'Bot', message:'Hello. Welcome to a new chat'}]
+    };
 
     updates[`/users/${id}`] = {
       name: user.name,
