@@ -30,7 +30,10 @@
 .chat{
     width: 80%;
     background-color: #f7f7f7;
+    overflow: auto;
+    height: 45vh;
 }
+
 
 table{
     width: 100%;

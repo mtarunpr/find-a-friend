@@ -37,8 +37,8 @@ class PageChat extends React.Component {
       // const onComplete = () => alert("sent"); //this.props.history.push(`/chats/${chatId}`);
       this.props.firebase.update(`/`, updates);
       this.state.message_send = '';
-    }
 
+    }
 
     leaveChat = () => {
         const chatId = this.props.chatId;
@@ -164,12 +164,16 @@ class PageChat extends React.Component {
                     {messages}
                   </table>
                 </div>
+              </div>
+              <br></br>
+              <div class="container">
                 <div class="row text-center">
                   <div class="col-10">
                       <textarea 
                           class="form-control"
                           name="message_send"
                           onChange={this.handleChange}
+                          onKeyPress={event => {if (event.key === 'Enter'){this.sendMessage();}}}
                           placeholder="Send message"
                           value={this.state.message_send}
                       />
@@ -184,7 +188,6 @@ class PageChat extends React.Component {
                     </button>
                   </div>
                 </div>
-                <br></br>
                 {/* Set up a confirmation before leaving the chat */}
                 <button
                   class="btn btn-primary leave"
@@ -198,9 +201,8 @@ class PageChat extends React.Component {
                 >
                   {this.state.reveal}
                 </button>
+                <br></br><br></br>
             </div>
-            <br></br>
-            <br></br>
           </div>
         );
     }
