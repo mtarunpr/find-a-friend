@@ -191,13 +191,9 @@ class PageHome extends React.Component {
                   Create new chat
                 </button>
               )}
-              {/* <Link className="btn btn-primary" to="/chat">Let's Chat!</Link> */}
             </div>
           </div>
         </div>
-        {/* <button className="btn btn-primary" onClick={() => {this.props.firebase.logout(); window.location.reload(true);}}>
-                Logout
-                </button> */}
       </div>
     );
   }
