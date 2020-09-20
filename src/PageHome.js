@@ -34,12 +34,10 @@ class PageHome extends React.Component {
       console.log('existing chat');
       const chatId = chat.chatId;
       const updates = {};
-      updates[`/users/${id}/chat`] = {
-        joined_chat: true
-      };
+      updates[`joined_chat`] = true;
 
       const onComplete = () => this.props.history.push(`/chat/${chatId}`);
-      this.props.firebase.update(`/`, updates, onComplete);
+      this.props.firebase.update(`/users/${id}/chat`, updates, onComplete);
     }
   };
 
