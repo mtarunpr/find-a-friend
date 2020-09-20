@@ -47,6 +47,21 @@ class PageProfile extends React.Component {
     </a>
   );
 
+  checkChanged= () => {
+    const { profile } = this.props;
+
+    const needCheck = [
+      'name',
+      'phone',
+      'facebook',
+      'instagram'
+    ]
+
+    let same = needCheck.every(input => this.state[input] === profile[input]);
+
+    return same;
+  }
+
   render() {
     if (!this.props.isLoggedIn) {
       return <Redirect to="/register" />
@@ -57,6 +72,8 @@ class PageProfile extends React.Component {
       facebook = '',
       instagram = ''
     } = this.state;
+
+    var changed = !this.checkChanged();
 
     return (
       <div>
@@ -90,7 +107,7 @@ class PageProfile extends React.Component {
         />
         <br />
         <br />
-        Make online connections with your match! 
+        Make online connections with your friend! 
         (These links will be available to only the people 
         you match with)
         <br />
@@ -126,12 +143,15 @@ class PageProfile extends React.Component {
           username={instagram}
         />
         <br />
-        <button
+        <button class="btn btn-primary"
           onClick={this.update}
           disabled={this.state.name.trim() === ''}
         >
           Update profile!
         </button>
+        {changed && (
+            <div style={{ color: 'red'}}>You have unsaved changes.</div>
+        )}
         <hr />
         <br />
         <Link to="/">Home</Link>
