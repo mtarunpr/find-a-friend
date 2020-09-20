@@ -76,7 +76,7 @@ class PageProfile extends React.Component {
     var changed = !this.checkChanged();
 
     return (
-      <div>
+      <div class="center">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="./">Find a Friend</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,11 @@ class PageProfile extends React.Component {
               </ul>
             </div>
           </nav>
-        <h2>Profile</h2>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1>Profile</h1>
+            </div>
+          </div>
         {this.state.error}
         <br />
         Email: {this.props.email}
@@ -170,7 +174,6 @@ class PageProfile extends React.Component {
         )}
         <hr />
         <br />
-        <Link to="/">Home</Link>
       </div>
     );
   }

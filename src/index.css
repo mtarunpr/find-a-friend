@@ -70,6 +70,14 @@ table{
     height: 100%;
 }
 
-.nav-item{
+.leave{
+    margin-top: 10px;
+    float: left;
+    width: 48%;
+}
+
+.reveal{
+    margin-top: 10px;
     float: right;
+    width: 48%;
 }

@@ -137,7 +137,7 @@ class PageChat extends React.Component {
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="./profile">Profile</a>
+                  <a class="nav-link" href="../profile">Profile</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/login" onClick={() => {this.props.firebase.logout()}}>Sign Out</a>
@@ -180,24 +180,22 @@ class PageChat extends React.Component {
                   </div>
                 </div>
                 <br></br>
+                {/* Set up a confirmation before leaving the chat */}
+                <button
+                  class="btn btn-primary leave"
+                  onClick={this.leaveChat}
+                >
+                  Leave Chat
+                </button>
+                <button
+                  class="btn btn-primary reveal"
+                  onClick={this.reveal}
+                >
+                  {this.state.reveal}
+                </button>
             </div>
             <br></br>
             <br></br>
-            {/* Set up a confirmation before leaving the chat */}
-            <button
-              class="btn btn-primary"
-              onClick={this.leaveChat}
-            >
-              Leave Chat
-            </button>
-
-
-            <button
-              class="btn btn-primary"
-              onClick={this.reveal}
-            >
-              {this.state.reveal}
-            </button>
           </div>
         );
     }
