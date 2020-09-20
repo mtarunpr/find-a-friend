@@ -65,9 +65,28 @@ class PageChat extends React.Component {
 
         }
 
-        updates[`/users/${this.props.chat.sender1}/chat`] = [];
-        updates[`/users/${this.props.chat.sender2}/chat`] = [];
-        updates[`/chats/${this.props.chatId}`] = {};
+        // If other user has already left, clear out chat
+        if (!this.props.chat.sender1 || !this.props.chat.sender2) {
+          updates[`/chats/${this.props.chatId}`] = {};
+        } else {
+          // Otherwise only clear out this user's sender id
+          if (this.props.chat.sender1 === this.props.isLoggedIn) {
+            updates[`/chats/${this.props.chatId}/sender1`] = {};
+          }
+          else if (this.props.chat.sender2 === this.props.isLoggedIn) {
+            updates[`/chats/${this.props.chatId}/sender2`] = {};
+          }
+        }
+
+        updates[`/users/${this.props.isLoggedIn}/chat`] = [];
+
+        const newMessage = {
+          sender_id:'Bot',
+          message:'Your anonymous friend has left the chat!'
+        };
+        this.props.chat.messages.push(newMessage);
+        updates[`/chats/${this.props.chatId}/messages`] = this.props.chat.messages;
+
         const onComplete = () => this.props.history.push(`/`);
         this.props.firebase.update(`/`, updates, onComplete);
 
