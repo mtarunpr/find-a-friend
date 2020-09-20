@@ -74,13 +74,18 @@ table {
 .leave {
   margin-top: 10px;
   float: left;
-  width: 48%;
+  width: 44%;
+}
+
+.report {
+  margin-top: 10px;
+  width: 8%;
 }
 
 .reveal {
   margin-top: 10px;
   float: right;
-  width: 48%;
+  width: 44%;
 }
 
 .update-profile {
