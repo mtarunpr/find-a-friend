@@ -57,7 +57,7 @@ class PageHome extends React.Component {
         break;
       }
     }
-    if(secondUser.chat){
+    if(secondUser.chat || id2 === id){
       alert("Sorry, there are no available matches at the moment. Please wait a hot sec");
       return;
     }
