@@ -111,17 +111,18 @@ class PageChat extends React.Component {
         }
 
         const messages = this.props.chat.messages.map((message, index) =>{
+          let avatar = "https://api.adorable.io/avatars/60/" + message.sender_id + "@adorable.io.png";
           if (message.sender_id == this.props.isLoggedIn){
             return (
               <tr>
-                <td></td><td></td><td class="user-one">{message.message}</td><td>{message.sender_id}</td>
+                <td></td><td></td><td class="user-one">{message.message}</td><td class="propic-one"><img src={avatar}></img></td>
               </tr>
             )
           }
           else{
             return (
               <tr>
-                <td>{message.sender_id}</td><td class="user-two">{message.message}</td><td></td><td></td>
+                <td class="propic-two"><img src={avatar}></img></td><td class="user-two">{message.message}</td><td></td><td></td>
               </tr>
             )
           }
@@ -156,6 +157,10 @@ class PageChat extends React.Component {
                 <br></br>
                 <div class="row align-items-center">
                   <table>
+                    <col class="pic" />
+                    <col class="message" />
+                    <col class="message" />
+                    <col class="pic" />
                     {messages}
                   </table>
                 </div>

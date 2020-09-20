@@ -42,8 +42,8 @@ class PageProfile extends React.Component {
   }
 
   goToProfile = ({url, username}) => (
-    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank">
-      Test it out
+    <a href={`${url}${username}`} rel="noopener noreferrer" target="_blank" class="btn btn-light profile">
+      Test It
     </a>
   );
 
@@ -78,7 +78,7 @@ class PageProfile extends React.Component {
     return (
       <div class="center">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="./">Find a Friend</a>
+            <a class="navbar-brand" href="../">Find a Friend</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -102,6 +102,7 @@ class PageProfile extends React.Component {
         <br />
         Email: {this.props.email}
         <br />
+        <br></br>
         <i 
           style={{ padding: 10, width: 30 }} 
           class="fa fa-user icon" />
@@ -127,10 +128,11 @@ class PageProfile extends React.Component {
         />
         <br />
         <br />
-        Make online connections with your friend! 
-        (These links will be available to only the people 
-        you match with)
+        Make online connections with your friends! <br></br>
+        These links will be available to only the people 
+        you match with.
         <br />
+        <br></br>
         <i 
           style={{ padding: 10, width: 30 }} 
           class="fa fa-instagram icon" />
@@ -142,7 +144,7 @@ class PageProfile extends React.Component {
           type='text'
           value={instagram}
         />
-        <this.goToProfile 
+        <this.goToProfile
           url="https://www.instagram.com/"
           username={instagram}
         />
@@ -158,12 +160,13 @@ class PageProfile extends React.Component {
           type='text'
           value={facebook}
         />
-        <this.goToProfile 
+        <this.goToProfile
           url="https://www.facebook.com/"
-          username={instagram}
+          username={facebook}
         />
         <br />
-        <button class="btn btn-primary"
+        <br></br>
+        <button class="btn btn-dark update-profile"
           onClick={this.update}
           disabled={this.state.name.trim() === ''}
         >
@@ -172,8 +175,9 @@ class PageProfile extends React.Component {
         {changed && (
             <div style={{ color: 'red'}}>You have unsaved changes.</div>
         )}
-        <hr />
         <br />
+        <br></br>
+        <br></br>
       </div>
     );
   }
