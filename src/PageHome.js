@@ -115,7 +115,6 @@ class PageHome extends React.Component {
         const profile = profiles[keyName];
         const path = `/profile/${keyName}`;
         return(
-          // <Link to={path}>{profile.name}</Link>
           <ProfileCardView profile = {profile} />
         );
       });
@@ -154,9 +153,16 @@ class PageHome extends React.Component {
                 {friends}
               </div>
               <div class="col-sm">
-                <button class="btn btn-primary" onClick={this.openChat}>
-                Let's Chat!
-                </button>
+                {console.log('Chat', this.props.chat)}
+                {this.props.chat? (
+                  <button class="btn btn-success" onClick={this.openChat}>
+                    Continue chatting
+                  </button>
+                ) : (
+                  <button class="btn btn-primary" onClick={this.openChat}>
+                    Create new chat
+                  </button>
+                )}
                 {/* <Link class="btn btn-primary" to="/chat">Let's Chat!</Link> */}
               </div>
             </div>
@@ -174,10 +180,10 @@ const mapStateToProps = (state, props) => {
 
   const userId = state.firebase.auth.uid;
   const profiles = state.firebase.data;
+  const chat = state.firebase.profile.chat;
   console.log(profiles.users)
-  return {isLoggedIn: userId, profiles: profiles.users};
+  return {isLoggedIn: userId, profiles: profiles.users, chat};
 }
-
 
 export default compose(
   withRouter,
