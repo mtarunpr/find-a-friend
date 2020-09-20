@@ -75,8 +75,7 @@ class PageHome extends React.Component {
       phone: user.phone,
       chat: {
         user_id: id2,
-        chatId: chatId,
-        reveal: false
+        chatId: chatId
       }
     };
 
@@ -86,8 +85,7 @@ class PageHome extends React.Component {
       phone: secondUser.phone,
       chat: {
         user_id: id,
-        chatId: chatId,
-        reveal: false
+        chatId: chatId
       }
     };
 
